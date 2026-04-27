@@ -1,11 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 
-// ✅ Add this line
 app.use(cors());
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -14,6 +13,34 @@ app.get("/", (req, res) => {
 
 app.get("/test", (req, res) => {
   res.json({ message: "API working ✅" });
+});
+
+// ✅ ABDM Token Function
+async function getAbdmToken() {
+  try {
+    const response = await axios.post(
+      "https://dev.abdm.gov.in/gateway/v0.5/sessions",
+      {
+        clientId: process.env.ABDM_CLIENT_ID,
+        clientSecret: process.env.ABDM_CLIENT_SECRET,
+      }
+    );
+
+    return response.data.accessToken;
+  } catch (error) {
+    console.error("Token error:", error.response?.data || error.message);
+    throw error;
+  }
+}
+
+// ✅ ADD THIS ROUTE (missing piece)
+app.get("/abdm/token", async (req, res) => {
+  try {
+    const token = await getAbdmToken();
+    res.json({ token });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to get token" });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
