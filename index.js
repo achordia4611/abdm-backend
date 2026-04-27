@@ -17,6 +17,13 @@ app.get("/test", (req, res) => {
 
 // ✅ ABDM Token Function
 async function getAbdmToken() {
+
+  // ✅ MOCK MODE
+  if (process.env.USE_MOCK === "true") {
+    return "mock-token-123";
+  }
+
+  // ✅ REAL MODE
   try {
     const response = await axios.post(
       "https://dev.abdm.gov.in/gateway/v0.5/sessions",
@@ -27,6 +34,7 @@ async function getAbdmToken() {
     );
 
     return response.data.accessToken;
+
   } catch (error) {
     console.error("Token error:", error.response?.data || error.message);
     throw error;
