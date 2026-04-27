@@ -1,5 +1,12 @@
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
+
+// ✅ Add this line
+app.use(cors());
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Backend running 🚀");
