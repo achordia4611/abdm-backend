@@ -15,11 +15,16 @@ app.get("/test", (req, res) => {
   res.json({ message: "API working ✅" });
 });
 
+
+
 // ✅ ABDM Token Function
 async function getAbdmToken() {
 
+  console.log("USE_MOCK =", process.env.USE_MOCK);
+
   // ✅ MOCK MODE
   if (process.env.USE_MOCK === "true") {
+    console.log("Using MOCK token");
     return "mock-token-123";
   }
 
