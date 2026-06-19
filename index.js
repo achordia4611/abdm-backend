@@ -56,6 +56,16 @@ app.get("/abdm/token", async (req, res) => {
   }
 });
 
+
+app.post("/abdm/callback", (req, res) => {
+  console.log("ABDM Callback Received");
+  console.log(JSON.stringify(req.body, null, 2));
+
+  res.status(200).json({
+    status: "ACKNOWLEDGED"
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
