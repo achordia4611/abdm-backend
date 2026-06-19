@@ -57,6 +57,10 @@ app.get("/abdm/token", async (req, res) => {
 });
 
 
+app.get("/abdm/callback", (req, res) => {
+  res.send("ABDM callback endpoint is live");
+});
+
 app.post("/abdm/callback", (req, res) => {
   console.log("ABDM Callback Received");
   console.log(JSON.stringify(req.body, null, 2));
