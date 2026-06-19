@@ -35,6 +35,7 @@ async function getAbdmToken() {
       {
         clientId: process.env.ABDM_CLIENT_ID,
         clientSecret: process.env.ABDM_CLIENT_SECRET,
+	grantType: "client_credentials"
       }
     );
 
