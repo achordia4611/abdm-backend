@@ -30,6 +30,8 @@ async function getAbdmToken() {
 
   // ✅ REAL MODE
   try {
+    console.log(process.env.ABDM_CLIENT_ID);
+    console.log(process.env.ABDM_CLIENT_SECRET);
     const response = await axios.post(
       "https://dev.abdm.gov.in/gateway/v0.5/sessions",
       {
